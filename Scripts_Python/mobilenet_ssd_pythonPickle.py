@@ -4,6 +4,7 @@ import cv2
 import time
 import os
 import pickle
+import shutil
 
 # Time before script execution
 start_time = time.time()
@@ -96,7 +97,8 @@ while True:
                     cv2.putText(frame, label, (xLeftBottom, yLeftBottom), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
                     if class_id == 15:
                         cropped_image = frame[yLeftBottom:yRightTop, xLeftBottom:xRightTop]
-                        boxes.append(cropped_image)
+                        if cropped_image.size != 0:
+                            boxes.append(cropped_image)
 
 
            
@@ -121,9 +123,8 @@ out.release()
 # cv2.destroyAllWindows()
 
 save_directory = "/mnt/c/Users/branj/OneDrive/Documents/Amaris/VM_Lab/Scripts_Python/Images"
-
-#Create directory if doesn't exist
-os.makedirs(save_directory, exist_ok=True)
+shutil.rmtree(save_directory)
+os.makedirs(save_directory)
 
 # Sauvegarder les images avec les rectangles
 for idx, img in enumerate(boxes):
