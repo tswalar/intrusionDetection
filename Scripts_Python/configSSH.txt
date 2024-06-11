@@ -1,0 +1,9 @@
+# Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+  Host 10.243.129.11
+    HostName 10.243.129.11
+    User yoannb
+    Port 2222
+
+Host alias
+    HostName hostname
+    User user
